@@ -46,7 +46,6 @@ public class FileReaderUtil {
 
     public static void main(String[] args) {
 
-        // Test readFileAsString
         try {
             String fileContent = FileReaderUtil.readFileAsString("src/main/resources/data.txt");
             System.out.println("File content as String: ");
@@ -55,7 +54,6 @@ public class FileReaderUtil {
             System.err.println(e.getMessage());
         }
 
-        // Test readFileAsList
         try {
             List<String> lines = FileReaderUtil.readFileAsList("src/main/resources/data.txt");
             System.out.println("File content as List:");
@@ -65,8 +63,6 @@ public class FileReaderUtil {
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }
-
-        // Test processFile with LineProcessor
         try {
             FileReaderUtil.processFile("src/main/resources/data.txt", line -> {
                 System.out.println("Processing line: " + line);

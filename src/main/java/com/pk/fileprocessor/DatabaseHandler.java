@@ -20,7 +20,6 @@ public class DatabaseHandler {
     static {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            // Load properties from config.properties file
             try (InputStream input = DatabaseHandler.class.getClassLoader().getResourceAsStream("config.properties")) {
                 if (input == null) {
                     System.out.println("Sorry, unable to find config.properties");
@@ -57,25 +56,6 @@ public class DatabaseHandler {
         return sb.toString().trim();
     }
 
-    public static void insertDataIntoDatabase(String data) throws SQLException {
-        String query;
-        try {
-            query = loadSQLQuery("insertData.sql");
-        } catch (IOException e) {
-            throw new SQLException("Error loading SQL query", e);
-        }
-        try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);
-             PreparedStatement stmt = connection.prepareStatement(query)) {
-
-            stmt.setString(1, data);
-            stmt.executeUpdate();
-            System.out.println("Data inserted into database: " + data);
-
-        } catch (SQLException e) {
-            throw new SQLException("Error inserting data into database", e);
-        }
-    }
-
     public static void insertCustomerWithTransaction(String customerName) throws SQLException {
         String query;
         try {
@@ -89,7 +69,7 @@ public class DatabaseHandler {
 
             connection.setAutoCommit(false);
 
-            stmt.setString(1, customerName); // Set only customer name, leave customer_id out
+            stmt.setString(1, customerName);
             stmt.executeUpdate();
             System.out.println("Customer inserted into database: " + customerName);
 
