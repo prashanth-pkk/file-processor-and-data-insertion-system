@@ -1,0 +1,4 @@
+id,name,productName,quantity,price
+1,John Doe,Widget,3,15.50
+2,Jane Smith,Gadget,5,22.00
+3,Bob Johnson,Device,2,30.00
